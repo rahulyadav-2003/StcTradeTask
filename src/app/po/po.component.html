@@ -1,0 +1,177 @@
+<p>PO works!</p>
+
+<!-- <div class="form-wrapper" *ngIf="!showInvoice">
+  <h2>🧾 Purchase Order Form</h2>
+
+  <form (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="supplierName">Supplier Name:</label>
+      <input
+        id="supplierName"
+        type="text"
+        [(ngModel)]="poDetails.supplierName"
+        name="supplierName"
+        placeholder="Supplier Name"
+        required
+        #supplierName="ngModel"
+      />
+      <div *ngIf="supplierName.invalid && supplierName.touched" class="error">Supplier Name is required.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="supplierAddress">Supplier Address:</label>
+      <textarea
+        id="supplierAddress"
+        [(ngModel)]="poDetails.supplierAddress"
+        name="supplierAddress"
+        rows="3"
+        placeholder="Full Address"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="supplierPhone">Supplier Phone:</label>
+      <input
+        id="supplierPhone"
+        type="text"
+        [(ngModel)]="poDetails.supplierPhone"
+        name="supplierPhone"
+        placeholder="Phone Number"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="contactPerson">Contact Person:</label>
+      <input
+        id="contactPerson"
+        type="text"
+        [(ngModel)]="poDetails.contactPerson"
+        name="contactPerson"
+        placeholder="Contact Person"
+      />
+    </div>
+
+    <div class="item-section">
+      <h3>🛒 Order Items</h3>
+      <div class="item-row" *ngFor="let item of poDetails.items; let i = index">
+        <input
+          type="text"
+          [(ngModel)]="item.description"
+          [name]="'description' + i"
+          placeholder="Item Description"
+          required
+        />
+        <input
+          type="number"
+          [(ngModel)]="item.qty"
+          [name]="'qty' + i"
+          placeholder="Qty"
+          min="0"
+          required
+        />
+        <input
+          type="number"
+          [(ngModel)]="item.unitPrice"
+          [name]="'unitPrice' + i"
+          placeholder="Unit Price"
+          min="0"
+          step="0.01"
+          required
+        />
+        <button
+          type="button"
+          (click)="removeItem(i)"
+          *ngIf="poDetails.items.length > 1"
+          aria-label="Remove item"
+        >
+          ✖
+        </button>
+      </div>
+      <button type="button" (click)="addItem()">➕ Add Item</button>
+    </div>
+
+    <div class="form-footer">
+      <button type="submit" (click)="viewPO()">📄 Generate Purchase Order</button>
+    </div>
+  </form>
+</div>
+
+
+<div class="purchase-order-container" *ngIf="showInvoice">
+  <div class="header-section">
+    <div class="logo-info">
+      <img src="assets/gimbooks-logo.png" alt="Logo" class="logo" />
+      <div class="company-info">
+        <h2>GimBooks</h2>
+        <p>[Street Address]</p>
+        <p>[City, ST ZIP]</p>
+        <p>Phone: (000) 000-0000</p>
+        <p>Fax: (000) 000-0000</p>
+        <p>Website:</p>
+      </div>
+    </div>
+    <div class="title-section">
+      <h1>PURCHASE ORDER</h1>
+      <p><strong>DATE:</strong> {{ today | date:'dd-MM-yyyy' }}</p>
+      <p><strong>PO #:</strong> {{ poDetails.poNumber }}</p>
+    </div>
+  </div>
+
+  <div class="vendor-ship-section">
+    <div class="vendor">
+      <h4>VENDOR</h4>
+      <p>{{ poDetails.supplierName }}</p>
+      <p>{{ poDetails.contactPerson }}</p>
+      <p>{{ poDetails.supplierAddress }}</p>
+      <p>Phone: {{ poDetails.supplierPhone }}</p>
+      <p>Fax: {{ poDetails.supplierFax }}</p>
+    </div>
+    <div class="ship-to">
+      <h4>SHIP TO</h4>
+      <p>{{ poDetails.shipTo.name }}</p>
+      <p>{{ poDetails.shipTo.company }}</p>
+      <p>{{ poDetails.shipTo.address }}</p>
+      <p>{{ poDetails.shipTo.cityZip }}</p>
+      <p>{{ poDetails.shipTo.phone }}</p>
+    </div>
+  </div>
+
+  <div class="table-headers">
+    <div>ITEM #</div>
+    <div>DESCRIPTION</div>
+    <div>QTY</div>
+    <div>UNIT PRICE</div>
+    <div>TOTAL</div>
+  </div>
+
+  <div class="table-rows" *ngFor="let item of poDetails.items">
+    <div>{{ item.itemNumber }}</div>
+    <div>{{ item.description }}</div>
+    <div>{{ item.qty }}</div>
+    <div>{{ item.unitPrice | number:'1.2-2' }}</div>
+    <div>{{ item.qty * item.unitPrice | number:'1.2-2' }}</div>
+  </div>
+
+  <div class="instructions">
+    <p><strong>Comments or Special Instructions</strong></p>
+    <p>{{ poDetails.comments }}</p>
+  </div>
+
+  <div class="totals">
+    <div><strong>SUBTOTAL</strong> ₹ {{ getSubTotal() | number:'1.2-2' }}</div>
+    <div><strong>TAX</strong> ₹ {{ poDetails.tax | number:'1.2-2' }}</div>
+    <div><strong>SHIPPING</strong> ₹ {{ poDetails.shipping | number:'1.2-2' }}</div>
+    <div><strong>OTHER</strong> ₹ {{ poDetails.other | number:'1.2-2' }}</div>
+    <div class="total"><strong>TOTAL ₹ {{ getGrandTotal() | number:'1.2-2' }}</strong></div>
+  </div>
+
+  <div class="footer">
+    <p>If you have any questions about this purchase order, please contact</p>
+    <p>{{ poDetails.contactPerson }}, {{ poDetails.supplierPhone }}, {{ poDetails.email }}</p>
+  </div>
+  
+  <div class="download-wrapper">
+    <button class="download-btn">Download PDF</button>
+  </div>
+</div> -->
+

@@ -1,0 +1,165 @@
+<div class="form-wrapper" *ngIf="invoiceForm">
+    <h2>🧾 Proforma Invoice Form</h2>
+
+    <form (ngSubmit)="submitForm(invoiceForm)" #invoiceForm="ngForm">
+        <div class="form-group">
+            <label for="to">To:</label>
+            <input id="to" type="text" [(ngModel)]="invoiceDetails.to" name="to" placeholder="Recipient Name" required
+                #to="ngModel" />
+            <div *ngIf="to.invalid && (to.touched || invoiceForm.submitted)" class="error">Recipient Name is required.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address :</label>
+            <textarea id="address" [(ngModel)]="invoiceDetails.address" name="address" rows="3"
+                placeholder="Full Address" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="tel">Telephone :</label>
+            <input id="tel" type="text" [(ngModel)]="invoiceDetails.tel" name="tel" placeholder="Phone Number" />
+        </div>
+
+        <div class="form-group">
+            <label for="attn">Attention :</label>
+            <input id="attn" type="text" [(ngModel)]="invoiceDetails.attn" name="attn" placeholder="Contact Person" />
+        </div>
+
+        <div class="form-group">
+            <label for="referenceFile">Upload Reference Document (Optional):</label>
+            <input id="referenceFile" type="file" name="referenceFile" />
+        </div>
+
+        <div class="item-section">
+            <h3>🛒 Invoice Items</h3>
+
+            <div class="item-row" *ngFor="let item of invoiceDetails.items; let i = index">
+                <input type="text" [(ngModel)]="item.description" [name]="'description' + i"
+                    placeholder="Item Description" />
+                <input type="number" [(ngModel)]="item.qty" [name]="'qty' + i" placeholder="Qty" min="0" />
+                <input type="number" [(ngModel)]="item.unitPrice" [name]="'unitPrice' + i" placeholder="Unit Price"
+                    min="0" step="0.01" />
+                <button type="button" (click)="removeItem(i)" *ngIf="invoiceDetails.items.length > 1"
+                    aria-label="Remove item">
+                    ✖
+                </button>
+            </div>
+            <button type="button" (click)="addItem()">➕ Add Item</button>
+        </div>
+
+        <div class="form-group" style="margin-top: 10px;">
+            <label for="shipping">Shipping Charges:</label>
+            <input id="shipping" type="number" [(ngModel)]="invoiceDetails.shippingCharges" name="shippingCharges"
+                placeholder="e.g. 500" min="0" />
+        </div>
+
+
+        <div class="form-footer">
+            <button type="submit"  [disabled]="!invoiceForm.valid">📄 Generate Invoice</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+<div class="invoice-container" id="invoice-pdf" *ngIf="showInvoice">
+    <div style="border: 1px solid black; padding: 20px;">
+    <header class="invoice-header">
+        <h1>STC OVERSEAS</h1>
+        <p>ADD: B-110, 1st Floor, Sector 64, Noida, Uttar Pradesh, 201301</p>
+        <p>Contact: Mr. Umesh Verma | +91 9811249072 | {{mail}}</p>
+        <h2>PROFORMA INVOICE</h2>
+    </header>
+
+    <section class="invoice-info">
+        <div class="left">
+            <p><strong>TO&nbsp;:</strong> {{ invoiceDetails.to }}</p>
+            <p>{{ invoiceDetails.address }}</p>
+            <p>Tel&nbsp;: {{ invoiceDetails.tel }}</p>
+            <p>Attn&nbsp;: {{ invoiceDetails.attn }}</p>
+        </div>
+        <div class="right">
+            <p><strong>REV. PERFORMA INVOICE</strong></p>
+            <p>No.&nbsp;: {{ getPiNumber() }}</p>
+            <p>Date&nbsp;: 26.05.2025</p>
+        </div>
+    </section>
+
+    <section class="invoice-items">
+        <div class="item-row header">
+            <span style="padding-left: 15px;">ITEM</span>
+            <span>DESCRIPTION OF GOODS</span>
+            <span>QTY</span>
+            <span>UNIT</span>
+            <span>AMOUNT</span>
+        </div>
+
+        <div class="item-row" *ngFor="let item of invoiceDetails.items; let i = index">
+            <span style="padding-left: 15px;">{{ i + 1 }}</span>
+            <span>{{ item.description }}</span>
+            <span>{{ item.qty }}</span>
+            <span>₹ {{ item.unitPrice | number: '1.2-2' }}</span>
+            <span>₹ {{ item.qty * item.unitPrice | number: '1.2-2' }}</span>
+        </div>
+
+
+        <div class="total-row">
+            <span class="label" colspan="4">TOTAL</span>
+            <span>₹ {{ getTotal() | number: '1.2-2' }}</span>
+        </div>
+
+        <div class="total-row">
+            <span class="label">Shipping Charges</span>
+            <span>₹ {{ invoiceDetails.shippingCharges | number: '1.2-2' }}</span>
+        </div>
+
+        <div class="total-row">
+            <span class="label">GST 18.00%</span>
+            <span>₹ {{ getGST() | number: '1.2-2' }}</span>
+        </div>
+
+        <div class="total-row grand">
+            <span class="label">Total AMOUNT PAYABLE</span>
+            <span><strong>₹ {{ getGrandTotal() | number: '1.2-2' }}</strong></span>
+        </div>
+    </section>
+
+    <div class="in-words">
+        <strong>IN WORDS: </strong> {{ toWords(getGrandTotal()) }}
+    </div>
+
+    <section class="terms-section">
+        <ol>
+            <li>100% NEFT/RTGS in advance of total value of PI raised.</li>
+            <li>Lead time: 2 days after receive payment</li>
+            <li>Warranty: 1 year from the date of Invoice</li>
+            <!-- <li>This solution for one month plan only</li> -->
+        </ol>
+
+        <div class="bank-details">
+            <strong>Domestic India account</strong><br />
+            <strong>HDFC Account</strong><br />
+            Beneficiary: STC OVERSEAS<br />
+            Branch: Chander Nagar, Ghaziabad (UP)<br />
+            A/C No.: 50200108857387<br />
+            IFSC: HDFC0002722
+        </div>
+    </section>
+
+    <footer class="signature">
+        <p><strong>FOR AND ON BEHALF OF</strong></p>
+        <p><strong>UMESH VERMA</strong></p>
+        <p><strong>STC OVERSEAS</strong></p>
+        <p>AUTHORIZED SIGNATURE</p>
+    </footer>
+    </div>
+</div>
+
+  <div style="text-align: right; margin: 20px;" *ngIf="showInvoice">
+        <button class="download-btn" (click)="downloadPDF()">Download PDF</button>
+    </div>

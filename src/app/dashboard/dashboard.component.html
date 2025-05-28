@@ -1,0 +1,33 @@
+<!-- src/app/dashboard/dashboard.component.html -->
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1 class="title"> STC TradeDesk Dashboard</h1>
+  </header>
+
+ <main class="dashboard-main">
+  <section class="card create-card" (click)="navigateTo('pi')" >
+    <h2>Create Proforma Invoice</h2>
+    <p>Generate PI documents easily.</p>
+  </section>
+
+  <section class="card create-card" (click)="navigateTo('po')" >
+    <h2>Create Purchase Order</h2>
+    <p>Initiate new purchase orders quickly.</p>
+  </section>
+
+  <section class="card create-card" (click)="navigateTo('quotation')">
+    <h2>Create Quotation</h2>
+    <p>Build custom quotations for clients.</p>
+  </section>
+
+  <!-- 👇 Nested components will render here -->
+  <router-outlet *ngIf="viewOutlet"></router-outlet>
+</main>
+
+
+
+  <footer class="dashboard-footer">
+    <p>&copy; 2025 TradeDesk. All rights reserved.</p>
+  </footer>
+</div>
+
