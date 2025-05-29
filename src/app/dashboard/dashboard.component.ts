@@ -7,24 +7,19 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
- viewOutlet: boolean = false;
+viewOutlet: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.checkRoute(this.router.url); // for first load
-
+    // Optional: control viewOutlet based on route
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.checkRoute(event.urlAfterRedirects);
+        const currentUrl = event.urlAfterRedirects;
+        // Show outlet only for valid child routes
+        this.viewOutlet = ['/pi', '/po', '/quotation'].includes(currentUrl);
       }
     });
-  }
-
-  private checkRoute(url: string): void {
-    // If URL is only root '/', hide outlet
-    // If URL is '/pi', '/po', or '/quotation', show outlet
-    this.viewOutlet = ['/pi', '/po', '/quotation'].some(path => url.startsWith(path));
   }
 
   navigateTo(path: string): void {

@@ -54,6 +54,7 @@ textarea {
 input[type="file"] {
   height: auto;
   padding: 6px 12px;
+  width: 100%;
 }
 
 textarea {
@@ -375,6 +376,7 @@ Responsive layout adjustments
 /* Tablet (max-width: 1024px) */
 @media (max-width: 1024px) {
   .form-wrapper {
+   
     padding: 30px 25px;
   }
 
@@ -399,6 +401,7 @@ Responsive layout adjustments
 /* Mobile (max-width: 600px) */
 @media (max-width: 600px) {
   .form-wrapper {
+    width: 300px;
     padding: 25px 20px;
   }
 
@@ -426,4 +429,10 @@ Responsive layout adjustments
     width: 100%;
     font-size: 14px;
   }
+
+  input[type="file"] {
+  height: auto;
+  padding: 6px 12px;
+  width: 100%;
+}
 }
