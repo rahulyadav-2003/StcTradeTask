@@ -33,7 +33,7 @@
         <div class="item-section">
             <h3>🛒 Invoice Items</h3>
 
-            <div class="item-row" *ngFor="let item of invoiceDetails.items; let i = index">
+            <div class="stc-item-row" *ngFor="let item of invoiceDetails.items; let i = index">
                 <input type="text" [(ngModel)]="item.description" [name]="'description' + i"
                     placeholder="Item Description" />
                 <input type="number" [(ngModel)]="item.qty" [name]="'qty' + i" placeholder="Qty" min="0" />

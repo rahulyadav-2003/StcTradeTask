@@ -130,6 +130,8 @@ getPiNumber(): string {
     // Save PDF file
     pdf.save('invoice.pdf');
   });
+  this.showInvoice = false;
+
 }
 
 

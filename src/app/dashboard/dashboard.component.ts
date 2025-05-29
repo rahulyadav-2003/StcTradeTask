@@ -7,27 +7,27 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  viewOutlet: boolean = false;
-  currentPath: string = '';
+ viewOutlet: boolean = false;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.checkRoute(this.router.url); // for first load
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.currentPath = event.urlAfterRedirects.replace('/', '');
-        this.viewOutlet = ['pi', 'po', 'quotation'].includes(this.currentPath);
+        this.checkRoute(event.urlAfterRedirects);
       }
     });
   }
 
+  private checkRoute(url: string): void {
+    // If URL is only root '/', hide outlet
+    // If URL is '/pi', '/po', or '/quotation', show outlet
+    this.viewOutlet = ['/pi', '/po', '/quotation'].some(path => url.startsWith(path));
+  }
+
   navigateTo(path: string): void {
-    if (this.currentPath === path && this.viewOutlet) {
-      // Second click on the same card - hide form
-      this.router.navigate(['/']);
-    } else {
-      // First click or different card - show form
-      this.router.navigate(['/' + path]);
-    }
+    this.router.navigate(['/' + path]);
   }
 }
