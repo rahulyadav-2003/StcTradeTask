@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,17 +7,27 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-viewOutlet : boolean = true; 
+  viewOutlet: boolean = false;
+  currentPath: string = '';
 
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentPath = event.urlAfterRedirects.replace('/', '');
+        this.viewOutlet = ['pi', 'po', 'quotation'].includes(this.currentPath);
+      }
+    });
   }
-    constructor(private router: Router, private route: ActivatedRoute) {}
 
-  navigateTo(path: string ): void {
-    this.viewOutlet = true;
-    this.router.navigate(['/' + path]);
-
+  navigateTo(path: string): void {
+    if (this.currentPath === path && this.viewOutlet) {
+      // Second click on the same card - hide form
+      this.router.navigate(['/']);
+    } else {
+      // First click or different card - show form
+      this.router.navigate(['/' + path]);
+    }
   }
-
 }

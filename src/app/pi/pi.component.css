@@ -333,9 +333,9 @@ button[type="button"]:hover {
 }
 
 
+/* 
 
-
-/* Responsive layout adjustments */
+Responsive layout adjustments
 @media (max-width: 768px) {
   .form-wrapper {
     padding: 25px 20px;
@@ -354,7 +354,7 @@ button[type="button"]:hover {
 
 
 
-/* Responsive layout adjustments */
+Responsive layout adjustments
 @media (max-width: 375px) {
   .form-wrapper {
    width: 80%;
@@ -368,5 +368,62 @@ button[type="button"]:hover {
     grid-template-columns: 1fr;
   }
 
+} */
+
+
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .form-wrapper {
+    padding: 30px 25px;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  .form-group {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .error {
+    grid-column: auto;
+  }
+
+  .item-row {
+    grid-template-columns: 2fr 1fr 1fr auto;
+  }
 }
 
+/* Mobile (max-width: 600px) */
+@media (max-width: 600px) {
+  .form-wrapper {
+    padding: 25px 20px;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  .form-group {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .item-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .item-row button {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  button[type="submit"],
+  button[type="button"] {
+    width: 100%;
+    font-size: 14px;
+  }
+}
