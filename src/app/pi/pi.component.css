@@ -352,3 +352,21 @@ button[type="button"]:hover {
 
 }
 
+
+
+/* Responsive layout adjustments */
+@media (max-width: 375px) {
+  .form-wrapper {
+   width: 80%;
+  }
+
+  .form-group {
+    grid-template-columns: 1fr;
+  }
+
+  .item-row {
+    grid-template-columns: 1fr;
+  }
+
+}
+

@@ -3,7 +3,7 @@
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100%;
   font-family: Arial, sans-serif;
 }
 
@@ -12,6 +12,7 @@
   color: white;
   padding: 20px;
   text-align: center;
+  font-size: 1.8em;
 }
 
 .dashboard-main {
@@ -29,22 +30,24 @@
   background-color: white;
   padding: 20px 30px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   width: 300px;
+  max-width: 100%;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease,  background-color 0.5s ease;;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
   cursor: pointer;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-   background-color: #f0f8ff; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #f0f8ff;
 }
 
 .card h2 {
   margin-bottom: 10px;
   color: #34495e;
+  font-size: 1.5em;
 }
 
 .dashboard-footer {
@@ -52,43 +55,86 @@
   color: white;
   padding: 10px;
   text-align: center;
+  font-size: 1em;
 }
 
+.title {
+  font-size: 2em;
+  font-weight: bold;
+}
 
+/* Responsive styles for tablets */
+@media (max-width: 1024px) {
+  .dashboard-main {
+    justify-content: center;
+    gap: 15px;
+    padding: 30px 15px;
+  }
 
-/* Responsive styles for tablets and phones */
-@media (max-width: 768px) {
+  .card {
+    width: 80%;
+    max-width: 400px;
+  }
+
+  .title {
+    font-size: 1.8em;
+  }
+}
+
+/* Responsive styles for phones */
+@media (max-width: 600px) {
+  .dashboard-header,
+  .dashboard-footer {
+    padding: 12px 8px;
+    font-size: 1em;
+  }
+
   .dashboard-main {
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     padding: 20px 10px;
   }
 
   .card {
-    width: 100%;
-    max-width: 90%;
-  }
-  .title{
-    font-size: 1.5em;
-  }
-}
-
-@media (max-width: 480px) {
-  .dashboard-header,
-  .dashboard-footer {
-    padding: 15px 10px;
-    font-size: 14px;
-  }
-
-  .card {
+    width: 80%;
     padding: 15px 20px;
   }
 
   .card h2 {
-    font-size: 18px;
+    font-size: 1.2em;
   }
-  .title{
+
+  .title {
+    font-size: 1.5em;
+  }
+}
+
+
+
+/* Responsive styles for phones */
+@media (max-width: 375px) {
+  .dashboard-header,
+  .dashboard-footer {
+    padding: 12px 8px;
+    font-size: 1em;
+  }
+
+  .dashboard-main {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+  }
+
+  .card {
+    width: 80%;
+    padding: 15px 20px;
+  }
+
+  .card h2 {
+    font-size: 1.2em;
+  }
+
+  .title {
     font-size: 1.5em;
   }
 }
