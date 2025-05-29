@@ -109,18 +109,20 @@
 
 
         <div class="total-row">
-            <span class="label" colspan="4">TOTAL</span>
+            <span class="label" colspan="4">Taxable Value</span>
             <span>₹ {{ getTotal() | number: '1.2-2' }}</span>
         </div>
 
-        <div class="total-row">
-            <span class="label">Shipping Charges</span>
-            <span>₹ {{ invoiceDetails.shippingCharges | number: '1.2-2' }}</span>
-        </div>
+       
 
         <div class="total-row">
             <span class="label">GST 18.00%</span>
             <span>₹ {{ getGST() | number: '1.2-2' }}</span>
+        </div>
+
+         <div class="total-row">
+            <span class="label">Shipping Charges</span>
+            <span>₹ {{ invoiceDetails.shippingCharges | number: '1.2-2' }}</span>
         </div>
 
         <div class="total-row grand">
